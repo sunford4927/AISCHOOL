@@ -1,0 +1,48 @@
+VSCODE
+
+
+material Theme - 컬러 테마 다양하게 있음
+material Icon Theme - 파일 좀더 편하게 관리
+prettier-code formatter - 코드포멧 형식을 지정
+auto rename - 자동완성
+Liver Server -라이브서버
+indent-rainbow - indent 컬러 표시
+select Default Profile - 터미널 종류 선택 
+cmd
+
+# 작성
+
+winget search nodejs(16년도 버전)
+
+
+크롬 웹스토어 - HTML5 outliner(웹 사이트 구조를 보여줌)
+
+//git base
+npm install axios - axios node.js. 브라우저를 위한 HTTP 클라이언트
+(mkdir grab-market-react - git base 폴더 만들기
+rm -r 
+npm install react-router-dom
+
+-------------------
+apt update
+apt install nano
+/home# su mrsono0;
+
+docker container ls -a
+winpty docker container attach myubuntu2
+
+/home/mrsono0#
+
+git bash 의 경우 winpty을 쳐줘야됨
+
+eyJ2ZXIiOiI4LjMuMiIsImFkciI6WyIxNzIuMjUuMTI4LjE6OTIwMCJdLCJmZ3IiOiIxZWNjOWU1NzczYjUzZTYzZmE5Mzg2YTI3MDhmNDMzZWMzZDU4Mzk1NzU0MDZmNDA3MWZhMjQ3OTZhYWNiZjVkIiwia2V5IjoicWZCODhJRUJZeHpTMzNIWEtSUTU6YTlMM08wa0pUSkNPVnVQSTVISFVUUSJ9
+
+
+
+프론트 엔드, 백엔드 크롤링 판다스
+
+데이터를 끌어와서(수집) 웹사이트 ex) 편의점 에 파는 목록들 크롤링해와서 어떤음식을만들수있는지, 맛집 정보
+8월2일 부터프로젝트 시작 대략 3주
+서비스업 분석  위도경도
+
+그룹바이
