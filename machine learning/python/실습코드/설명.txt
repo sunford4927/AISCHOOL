@@ -12,8 +12,17 @@ convolution + pooling layers(image의 특징을 찾아줌)
 
 퍼셉트론에서 웨이트는 열백터
 
-
-
+딥러닝 순서
+1. 데이터로드
+2. 데이터 전처리
+- 특성 공학
+- 특성 선택
+- 특성 추출
+3. 데이터 분할
+4. 모델 생성&컴파일
+5. 훈련
+6. 검증
+7. 예측
 
 
 역전파(BackPropagation)
@@ -26,7 +35,7 @@ softmax
 - 0과 1사이값으로 정규화를 해주는 함수(확률처럼 모든 아웃풋 값을 더하면 1이나온다)
 
 loss funstion
-- 손실함수
+- 손실함수 0.5 * ((y_hat -y)** 2).sum()
 
 optimization
 - 최적화
@@ -57,3 +66,27 @@ Transfer learning(전이학습)
 
 Fine Tuning(파인 튜닝)
 - 출력층 및 출력층에 가까운 부분뿐만 아니라 모든 층의 파라미터 다시 학습
+
+tf.constant
+- 상수(값변경 불가능)
+
+tf.Variable
+- 값 변경 가능,
+
+activation='relu'
+- 0보다 작으면 0
+  0보다 크면 자기자신을 출력한다
+
+loss
+: 훈련 손실값
+
+acc 
+: 훈련 정확도
+
+val_loss
+: 검증 손실값
+
+val_acc 
+: 검증 정확도
+
+  tf.convert_to_tensor()로 상수 변경 가능
