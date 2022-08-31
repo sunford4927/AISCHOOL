@@ -33,7 +33,7 @@ def main():
             customer_list.append(Input.input_cust())
             index = len(customer_list) - 1
         if choice == 'U':
-            customer_list = update_cust(customer_list)
+            customer_list = Updata.update_cust(customer_list)
         if choice == 'D':
             customer_list = delete.delete_cust(customer_list)
             if index > len(customer_list) - 1:
@@ -101,49 +101,52 @@ def search(customer_list):
     if idx == -1:
         print('등록되지 않은 고객입니다.')
     return idx
+class Updata:
+    def __init__(self,customer_list,idx):
+        self.customer_list = customer_list
+        self.idx = idx
+    def update_update(customer_list, idx):
+        while True:
+            choice2 = input('''
+            다음 중 수정 할 항목을 입력 하세요. 
+            name, gender, email, year
+            (수정 할 항목이 없으면 "Q"를 입력 하세요)''')
 
-def update_update(customer_list, idx):
-    while True:
-        choice2 = input('''
-        다음 중 수정 할 항목을 입력 하세요. 
-        name, gender, email, year
-        (수정 할 항목이 없으면 "Q"를 입력 하세요)''')
+            customer = dict()
+            if choice2.lower() == 'year':
+                customer = Updata.input_year(customer)
+            elif choice2.lower() == 'name':
+                customer = Updata.input_name(customer)
+            elif choice2.lower() == 'gender':
+                customer = Updata.input_gender(customer)
+            elif choice2.lower() == 'eamil':
+                customer = Updata.input_email(customer)
+            elif choice2.upper() == 'Q':
+                break
+            customer_list[idx][choice2] = customer[choice2]
+        return customer_list
 
-        customer = dict()
-        if choice2.lower() == 'year':
-            customer = input_year(customer)
-        elif choice2.lower() == 'name':
-            customer = input_name(customer)
-        elif choice2.lower() == 'gender':
-            customer = input_gender(customer)
-        elif choice2.lower() == 'eamil':
-            customer = input_email(customer)
-        elif choice2.upper() == 'Q':
-            break
-        customer_list[idx][choice2] = customer[choice2]
-    return customer_list
+    # 고객 정보 수정
+    def update_cust(customer_list):
+        # customer_list = list()
+        # test_cust = {'name': '손정현', 'gender': 'M', 'email': 'abc@abc', 'year': 1999}
+        # customer_list.append(test_cust)
+        # test_cust = {'name': '박정현', 'gender': 'F', 'email': 'bbc@bbc', 'year': 1999}
+        # customer_list.append(test_cust)
 
-# 고객 정보 수정
-def update_cust(customer_list):
-    # customer_list = list()
-    # test_cust = {'name': '손정현', 'gender': 'M', 'email': 'abc@abc', 'year': 1999}
-    # customer_list.append(test_cust)
-    # test_cust = {'name': '박정현', 'gender': 'F', 'email': 'bbc@bbc', 'year': 1999}
-    # customer_list.append(test_cust)
+        # 고객 정보 검색
+        idx = search(customer_list)
+        if idx == -1:
+            pass
+        else:
+            # 고객 정보 수정
+            customer_list = Updata.update_update(customer_list, idx)
 
-    # 고객 정보 검색
-    idx = search(customer_list)
-    if idx == -1:
-        pass
-    else:
-        # 고객 정보 수정
-        customer_list = update_update(customer_list, idx)
-
-    # print('수정 내용 확인 : ', customer_list[idx])
-    global index
-    index = idx
-    print('수정 완료')
-    return customer_list
+        # print('수정 내용 확인 : ', customer_list[idx])
+        global index
+        index = idx
+        print('수정 완료')
+        return customer_list
 
 class Input:
     def __init__(self,customer):

@@ -1,7 +1,5 @@
 lenet-5 구글링
 
-퍼셉트론(perceptron)
-AND, OR 연산 등 선형 분리가 가능한 문제의 해결에만 사용될 수 있슴
 
 이미지의 특징(x)
 convolution + pooling layers(image의 특징을 찾아줌)
@@ -26,7 +24,8 @@ convolution + pooling layers(image의 특징을 찾아줌)
 
 
 역전파(BackPropagation)
-- 
+- 역전파는 반대로 출력층에서 입력층 방향으로 계산하면서 가중치를 업데이트
+
 주피터 코랩
 런타임 -> 런타임 유형 변경
 
@@ -88,5 +87,13 @@ val_loss
 
 val_acc 
 : 검증 정확도
-
   tf.convert_to_tensor()로 상수 변경 가능
+
+Stride
+- 높을 수록 연산량이 많아짐(낮으면 촘촘하게, 높으면 넓은간격으로)
+
+Perceptron(퍼셉트론)
+- 프랑크 로젠블라트(Frank Rosenblatt)가 1957년에 제안한 초기 형태의 인공 신경망으로 다수의 입력으로부터 하나의 결과를 내보내는 알고리즘
+- AND, OR 연산 등 선형 분리가 가능한 문제의 해결에만 사용될 수 있슴
+
+
