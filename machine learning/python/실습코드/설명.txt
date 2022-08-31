@@ -57,7 +57,7 @@ SGD(확률적 경사 하강법/Stochastic Gradient Descent)
  속도가 매우 빠르다. 또한, 데이터 하나씩 처리하기 때문에 오차율이 크고 GPU의 성능을 모두 활용하지 못하는 단점을 가진다.
  이러한 단점들을 보완하기 위해 나온 방법들이 Mini batch를 이용한 방법이며, 확률적 경사 하강법의 노이즈를 줄이면서도 전체 배치보다 더 효율적인 것
 
-evaluate
+evaluate(x_test,y_test)
 - 최종적인 정답률과 loss를 알수 있다
 
 Transfer learning(전이학습)
@@ -96,4 +96,10 @@ Perceptron(퍼셉트론)
 - 프랑크 로젠블라트(Frank Rosenblatt)가 1957년에 제안한 초기 형태의 인공 신경망으로 다수의 입력으로부터 하나의 결과를 내보내는 알고리즘
 - AND, OR 연산 등 선형 분리가 가능한 문제의 해결에만 사용될 수 있슴
 
+
+expand_dims
+- 배열의 차원을 추가
+
+
+여자옷 남자옷 운동화 하이힐 
 
