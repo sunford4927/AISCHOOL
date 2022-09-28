@@ -128,3 +128,17 @@ ML으로만하면 시간많이소요, 인덱싱만 해보자
 우리 조는 어떤 경험을 했는지 idea 공유
 7. ☆ 팀장의 역할이 현시점에 가장 중요하다. ☆
 # gitTest2
+
+2022-09-28
+ELB1-AWS-UBUNTU
+ubuntu@ip-172-31-13-248:~$ sudo apt update
+ubuntu@ip-172-31-13-248:~$ sudo apt install nginx
+ubuntu@ip-172-31-13-248:~$ sudo systemctl status nginx
+- nginx 실행 확인
+
+![image](https://user-images.githubusercontent.com/109319988/192676367-8305e6f3-638e-440c-b740-ee766eeb5056.png)
+
+ELB2-AWS-UBUNTU
+ubuntu@ip-172-31-3-130:~$ sudo apt update
+ubuntu@ip-172-31-3-130:~$ sudo apt install nginx
+ubuntu@ip-172-31-3-130:~$ sudo systemctl status nginx
