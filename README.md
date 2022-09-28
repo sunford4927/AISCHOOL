@@ -131,6 +131,7 @@ ML으로만하면 시간많이소요, 인덱싱만 해보자
 
 2022-09-28
 ELB1-AWS-UBUNTU
+
 ubuntu@ip-172-31-13-248:~$ sudo apt update
 
 ubuntu@ip-172-31-13-248:~$ sudo apt install nginx
@@ -140,9 +141,16 @@ ubuntu@ip-172-31-13-248:~$ sudo systemctl status nginx
 
 ![image](https://user-images.githubusercontent.com/109319988/192676367-8305e6f3-638e-440c-b740-ee766eeb5056.png)
 
+sudo nano /var/www/html/index.nginx-debian.html\
+![image](https://user-images.githubusercontent.com/109319988/192678990-646485d3-d928-43bd-a2b0-e297aa51ce94.png)
+
 ELB2-AWS-UBUNTU
+
 ubuntu@ip-172-31-3-130:~$ sudo apt update
 
 ubuntu@ip-172-31-3-130:~$ sudo apt install nginx
 
 ubuntu@ip-172-31-3-130:~$ sudo systemctl status nginx
+
+ubuntu@ip-172-31-3-130:~$ nano /var/www/html/index.nginx-debian.html(h1 수정)
+![image](https://user-images.githubusercontent.com/109319988/192678832-90f4b199-7a97-42c9-9850-75f561460962.png)
