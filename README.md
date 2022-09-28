@@ -132,7 +132,9 @@ ML으로만하면 시간많이소요, 인덱싱만 해보자
 2022-09-28
 ELB1-AWS-UBUNTU
 ubuntu@ip-172-31-13-248:~$ sudo apt update
+
 ubuntu@ip-172-31-13-248:~$ sudo apt install nginx
+
 ubuntu@ip-172-31-13-248:~$ sudo systemctl status nginx
 - nginx 실행 확인
 
@@ -140,5 +142,7 @@ ubuntu@ip-172-31-13-248:~$ sudo systemctl status nginx
 
 ELB2-AWS-UBUNTU
 ubuntu@ip-172-31-3-130:~$ sudo apt update
+
 ubuntu@ip-172-31-3-130:~$ sudo apt install nginx
+
 ubuntu@ip-172-31-3-130:~$ sudo systemctl status nginx
