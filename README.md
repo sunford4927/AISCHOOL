@@ -155,10 +155,10 @@ ubuntu@ip-172-31-3-130:~$ sudo systemctl status nginx
 ubuntu@ip-172-31-3-130:~$ nano /var/www/html/index.nginx-debian.html(h1 수정)
 ![image](https://user-images.githubusercontent.com/109319988/192678832-90f4b199-7a97-42c9-9850-75f561460962.png)\
 
-- 로드 밸런싱
+# 로드 밸런싱
 - EC2의 로드밸런서 클릭
 ![image](https://user-images.githubusercontent.com/109319988/192679923-73397015-ccb6-4c1c-b2f8-3705369f1735.png)\
-# 생성하기 누른 후 Application Load Balancer 클릭\
+- 생성하기 누른 후 Application Load Balancer 클릭
 Load balancer name : elb-test\
 VPC : default 값\
 mappings = ap-northeast-2a, ap-northeast-2b\
@@ -166,8 +166,8 @@ mappings = ap-northeast-2a, ap-northeast-2b\
 ![image](https://user-images.githubusercontent.com/109319988/192682575-200a22c1-c59c-4727-9d56-b3f2feee20f3.png)\
 
 - Listeners and routing\
-protocol = https : 80
-# default action 없으면 Create target group 클릭 해서 만들기\
+protocol = https : 80\
+- default action 없으면 Create target group 클릭 해서 만들기
 
 
 
