@@ -316,7 +316,6 @@ http {
 
 
 
-'''
 FROM nginx
 
 COPY nginx/templates/default.conf.templates /etc/nginx/templates/default.conf.templates
@@ -325,4 +324,35 @@ COPY static /data/static
 
 EXPOSE 80
 CMD ["nginx","-g","damon off;"]
-'''
+
+25. copilot init 
+26. Load Balanced Web Service 클릭
+
+Workload type: Load Balanced Web Service
+Service name: poll-frontend2
+Dockerfile: ./Dockerfile.frontend
+
+27. copilot deploy -> poll-frontend2
+28. polls 폴더 밑에 middleware.py 생성 후 코드 입력
+from django.http import HttpResponse
+
+
+class HealthCheckMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.path == "/health":
+            return HttpResponse("ok")
+        response = self.get_response(request)
+        return response
+
+29. settings.py MIDDLEWARE 코드 추가 ->'polls.middleware.HealthCheckMiddleware',
+30. poll-frontend2/manifest.yml -> healthcheck: '/health' # 기본설정 바꿈
+31. settings.py 수정
+
+DEBUG = False
+
+ALLOWED_HOSTS = ['.elb.amazonaws.com']
+
+32. copilot deploy -> poll-backend2
