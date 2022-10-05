@@ -285,10 +285,11 @@ ENTRYPOINT ["sh","./docker-entrypoint.sh"]
 ## container service 에 로그확인
 ![image](https://user-images.githubusercontent.com/109319988/193975893-9fc6f447-c2b8-4a26-9894-d9b051b48ec2.png)
 
-22. nginx.conf 파일 수정
-![image](https://user-images.githubusercontent.com/109319988/193976561-f890cf73-270e-45e6-8494-80368d85d289.png)
+### nginx.conf 파일 수정
+![image](https://user-images.githubusercontent.com/109319988/193976561-f890cf73-270e-45e6-8494-80368d85d289.png)\
 
-23. nginx폴더 안 templates폴더 생성 -> default.conf.template파일생성 후 아래 코드 붙혀넣기
+
+### nginx폴더 안 templates폴더 생성 -> default.conf.template파일생성 후 아래 코드 붙혀넣기
 
 events {
   worker_connections  4096;  ## Default: 1024
