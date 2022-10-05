@@ -334,9 +334,8 @@ Dockerfile: ./Dockerfile.frontend
 
 ### copilot deploy -> poll-frontend2
 ### polls 폴더 밑에 middleware.py 생성 후 코드 입력
+
 from django.http import HttpResponse
-
-
 class HealthCheckMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -363,3 +362,7 @@ ALLOWED_HOSTS = ['.elb.amazonaws.com']
 ### copilot svc deploy --app poll-app --env prod --name poll-frontend2 # 클러스터 안에 넣기
 ### sudo apt install apache2-utils 
 ### ab --help # apache2-utils 도움말
+### ab -n 3000 -c 10 http://poll-Publi-1D2BFOW3GGWK4-273368480.ap-northeast-2.elb.amazonaws.com/polls/list/ # 3000포트로 10번 열어라
+### Cloud Watch 에서 그래프확인
+![image](https://user-images.githubusercontent.com/109319988/194013035-e0579682-e2d9-488a-96e2-a25db3d289e3.png)
+
