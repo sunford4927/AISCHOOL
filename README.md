@@ -177,6 +177,8 @@ container 만들기
 ### EC2 인스턴스 만들기
 ### VScode에 public Ip 입력후 들어가기
 ### 아래 코드 한 줄 씩 입력
+
+
 ### install AWS Copilot cli
 
 curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
@@ -248,6 +250,15 @@ Service name: poll-backend2
 Docker daemon is not responsive; Copilot won't build from a Dockerfile.
 Image: postgres
 
+### manifest.yml(db파일) 수정
+- image -> port: 5432 추가
+- variables 추가
+
+variables:
+  POSTGRES_DB: poll
+  POSTGRES_USER: fast
+  POSTGRES_PASSWORD: 1234qwer
+  
 ### copilot deploy # 권한이 없어서 안됨
 ### settings.py database수정
 ![image](https://user-images.githubusercontent.com/109319988/193976379-b1feb59b-979c-4200-80a6-edf12866aead.png)
@@ -366,3 +377,5 @@ ALLOWED_HOSTS = ['.elb.amazonaws.com']
 ### Cloud Watch 에서 그래프확인
 ![image](https://user-images.githubusercontent.com/109319988/194013035-e0579682-e2d9-488a-96e2-a25db3d289e3.png)
 
+
+### 홈 디렉토리로 이동
