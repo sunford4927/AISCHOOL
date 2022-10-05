@@ -217,8 +217,110 @@ git switch ecs-base\
 - 모니터링 : Amazon CloudWatch Container Insights, AWS X-Ray
             Amazon Managed Service for Prometheus
 
-8. copilot init
+8. copilot init # 권한 없어서 안됨
 9. AWS IAM 역활 추가
 10. AdministratorAccess	AWS 관리형 - 직무 Provides full access to AWS services and resources. # 제일 권한 쎈놈
 11. EC2 인스턴스 작업 -> 보안 -> IAM 역활 선택
-12. 
+12. VScode 로 돌아와 copilot init 입력 # copilot 생성
+'''
+Application name: poll-app
+Workload type: Backend Service
+Service name: poll-db
+Docker daemon is not responsive; Copilot won't build from a Dockerfile.
+Image: postgres
+'''
+13. cd ubuntu/Django-Poll-App/
+14. copilot env init # 환경변수 설정
+'''
+Environment name: dev
+Credential source: [profile default]
+Default environment configuration? Yes, use default.
+'''
+### newgrp docker /도커 권한
+### copilot svc ls /서비스목록
+### 잘못 생성해서 지워야 할 경우 -> copilot svc delete "Name"
+15. copilot env deploy --name dev # 환경배포 / 서브넷 4개가 생김
+16. copilot deploy # 서비스 생성 만약 Failed가 뜨면 자동으로 lolback이돌아가 늦으므로 IAM 스택에서 지우고 다시실행
+17. copilot init
+'''
+Workload type: Backend Service
+Service name: poll-backend2
+Docker daemon is not responsive; Copilot won't build from a Dockerfile.
+Image: postgres
+'''
+18. copilot deploy # 권한이 없어서 안됨
+19. settings.py database수정
+![image](https://user-images.githubusercontent.com/109319988/193976379-b1feb59b-979c-4200-80a6-edf12866aead.png)
+
+- Django-Poll-App 폴더에 Dockerfile.backend 파일만들고 아래코드 넣기
+'''
+FROM python:3.8-slim-buster
+
+RUN apt update \
+    && apt install -y gcc libpq-dev python-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+COPY . .
+RUN pip install -r requirements.txt
+
+
+EXPOSE 8000
+
+ENTRYPOINT ["sh","./docker-entrypoint.sh"]
+'''
+20. newgrp docker # 권한 부여
+21. copilot deploy # dockerfile 빌드 됨
+## container service 에 로그확인
+![image](https://user-images.githubusercontent.com/109319988/193975893-9fc6f447-c2b8-4a26-9894-d9b051b48ec2.png)
+
+22. nginx.conf 파일 수정
+![image](https://user-images.githubusercontent.com/109319988/193976561-f890cf73-270e-45e6-8494-80368d85d289.png)
+
+23. nginx폴더 안 templates폴더 생성 -> default.conf.template파일생성 후 아래 코드 붙혀넣기
+'''
+events {
+  worker_connections  4096;  ## Default: 1024
+}
+http {
+    charset utf-8;
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}
+12:41
+### default.conf.template
+    server {
+        listen      80;
+        server_name localhost; # IP 또는 FQDN으로 변경. 실습에서는 AWS 콘솔에서 IP 확인
+        charset     utf-8;
+
+        # max upload size
+        client_max_body_size 75M;   # adjust to taste
+
+        location /static/ {
+            alias /data/static/; # Django 프로젝트의 static 파일 위치. 실습에서는 Dockerfile에서 지정.
+        }
+
+        location / {
+            # 실습에서는 host의 private ip 사용 ($ ip address show eth0)
+            # proxy_pass              http://app:8000;  
+            proxy_pass              http://poll-backend2.${COPILOT_SERVICE_DISCOVERY_ENDPOINT}:8000;
+            proxy_set_header        Host $host;
+        }
+    }
+'''
+24. Django-Poll_App 폴더에 Dockerfile.frontend 파일 생성후 아래 코드 붙혀넣기
+
+'''
+FROM nginx
+
+COPY nginx/templates/default.conf.templates /etc/nginx/templates/default.conf.templates
+COPY nginx/config/nginx.conf /etc/nginx/nginx.conf
+COPY static /data/static
+
+EXPOSE 80
+CMD ["nginx","-g","damon off;"]
+'''
