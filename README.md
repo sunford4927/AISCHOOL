@@ -356,3 +356,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['.elb.amazonaws.com']
 
 32. copilot deploy -> poll-backend2
+33. copilot env init --name prod --profile default --container-insights # 환경 변수 작업
+34. copilot env deploy --name prod # env 환경 만들기
+35. copilot svc deploy --app poll-app --env prod --name poll-app2 # 클러스터 안에 넣기
+36. copilot svc deploy --app poll-app --env prod --name poll-backend2 # 클러스터 안에 넣기
+37. copilot svc deploy --app poll-app --env prod --name poll-frontend2 # 클러스터 안에 넣기
