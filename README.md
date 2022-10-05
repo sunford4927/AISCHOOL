@@ -170,7 +170,55 @@ protocol = https : 80\
 - default action 없으면 Create target group 클릭 해서 만들기
 
 
+머리속으로 상상하면서 하자!(AWS)
+# copilot 
+awscli window에서 돌아가는것도 있어서 키페어만 잘 관리하면 어디든 사용가능
+container 만들기
+1. EC2 인스턴스 만들기
+2. VScode에 public Ip 입력후 들어가기
+3. 아래 코드 한 줄 씩 입력
+### install AWS Copilot cli
+```
+curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
+chmod +x copilot
+sudo mv copilot /usr/local/bin/copilot
+source <(copilot completion bash)
+copilot completion bash > copilot.sh
+sudo mv copilot.sh /etc/bash_completion.d/copilot
+```
+### install AWS cli
+```
+sudo apt update && sudo apt install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+uzip awscliv2.zip
+sudo ./aws/install
+```
+4. ubuntu@ip-172-31-38-27:~$ aws configure\
+AWS Access Key ID [None]: \
+AWS Secret Access Key [None]:\ 
+Default region name [None]: ap-northeast-2\
+Default output format [None]: \
+5. sudo apt install -y docker.io # 도커 설치
+6. sudo usermod -aG docker ubuntu # 도커 권한 주기
+7. git clone https://github.com/go4real/Django-Poll-App.git
+cd Django-Poll-App\
+git switch ecs-base\
+# git check out/git switch 브런치 바꾸기 버전차이 구/신
+## 클라우드 컴퓨팅 서비스 모델 
+- laaS
+- PaaS
+- SaaS
+![image](https://user-images.githubusercontent.com/109319988/193958711-b009927d-3546-4917-bda6-bf48881863e7.png)\
 
+# AWS 컨테이너 서비스 환경 
+- 컨테이너 오케스트레이션: Amazon ECS, Amazon EKS
+- 호스팅 환경 : Amazon EC2, AWS Fargate
+- 이미지 레지스트리 : Amazon ECR
+- 모니터링 : Amazon CloudWatch Container Insights, AWS X-Ray
+            Amazon Managed Service for Prometheus
 
-
-
+8. copilot init
+9. AWS IAM 역활 추가
+10. AdministratorAccess	AWS 관리형 - 직무 Provides full access to AWS services and resources. # 제일 권한 쎈놈
+11. EC2 인스턴스 작업 -> 보안 -> IAM 역활 선택
+12. 
