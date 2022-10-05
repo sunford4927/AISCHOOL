@@ -289,7 +289,7 @@ ENTRYPOINT ["sh","./docker-entrypoint.sh"]
 ![image](https://user-images.githubusercontent.com/109319988/193976561-f890cf73-270e-45e6-8494-80368d85d289.png)
 
 23. nginx폴더 안 templates폴더 생성 -> default.conf.template파일생성 후 아래 코드 붙혀넣기
-'''
+
 events {
   worker_connections  4096;  ## Default: 1024
 }
@@ -301,7 +301,7 @@ http {
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;
 }
-12:41
+
 ### default.conf.template
     server {
         listen      80;
