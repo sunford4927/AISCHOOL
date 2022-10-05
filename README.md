@@ -174,33 +174,33 @@ protocol = https : 80\
 # copilot 
 awscli window에서 돌아가는것도 있어서 키페어만 잘 관리하면 어디든 사용가능
 container 만들기
-1. EC2 인스턴스 만들기
-2. VScode에 public Ip 입력후 들어가기
-3. 아래 코드 한 줄 씩 입력
+### EC2 인스턴스 만들기
+### VScode에 public Ip 입력후 들어가기
+### 아래 코드 한 줄 씩 입력
 ### install AWS Copilot cli
-```
+
 curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
 chmod +x copilot
 sudo mv copilot /usr/local/bin/copilot
 source <(copilot completion bash)
 copilot completion bash > copilot.sh
 sudo mv copilot.sh /etc/bash_completion.d/copilot
-```
+
 ### install AWS cli
-```
+
 sudo apt update && sudo apt install unzip
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 uzip awscliv2.zip
 sudo ./aws/install
-```
-4. ubuntu@ip-172-31-38-27:~$ aws configure\
+
+### ubuntu@ip-172-31-38-27:~$ aws configure\
 AWS Access Key ID [None]: \
 AWS Secret Access Key [None]:\ 
 Default region name [None]: ap-northeast-2\
 Default output format [None]: \
-5. sudo apt install -y docker.io # 도커 설치
-6. sudo usermod -aG docker ubuntu # 도커 권한 주기
-7. git clone https://github.com/go4real/Django-Poll-App.git
+### sudo apt install -y docker.io # 도커 설치
+### sudo usermod -aG docker ubuntu # 도커 권한 주기
+### git clone https://github.com/go4real/Django-Poll-App.git
 cd Django-Poll-App\
 git switch ecs-base\
 # git check out/git switch 브런치 바꾸기 버전차이 구/신
@@ -217,43 +217,43 @@ git switch ecs-base\
 - 모니터링 : Amazon CloudWatch Container Insights, AWS X-Ray
             Amazon Managed Service for Prometheus
 
-8. copilot init # 권한 없어서 안됨
-9. AWS IAM 역활 추가
-10. AdministratorAccess	AWS 관리형 - 직무 Provides full access to AWS services and resources. # 제일 권한 쎈놈
-11. EC2 인스턴스 작업 -> 보안 -> IAM 역활 선택
-12. VScode 로 돌아와 copilot init 입력 # copilot 생성
-'''
+### copilot init # 권한 없어서 안됨
+### AWS IAM 역활 추가
+### AdministratorAccess	AWS 관리형 - 직무 Provides full access to AWS services and resources. # 제일 권한 쎈놈
+### EC2 인스턴스 작업 -> 보안 -> IAM 역활 선택
+### VScode 로 돌아와 copilot init 입력 # copilot 생성
+
 Application name: poll-app
 Workload type: Backend Service
 Service name: poll-db
 Docker daemon is not responsive; Copilot won't build from a Dockerfile.
 Image: postgres
-'''
-13. cd ubuntu/Django-Poll-App/
-14. copilot env init # 환경변수 설정
-'''
+
+### cd ubuntu/Django-Poll-App/
+### copilot env init # 환경변수 설정
+
 Environment name: dev
 Credential source: [profile default]
 Default environment configuration? Yes, use default.
-'''
+
 ### newgrp docker /도커 권한
 ### copilot svc ls /서비스목록
 ### 잘못 생성해서 지워야 할 경우 -> copilot svc delete "Name"
-15. copilot env deploy --name dev # 환경배포 / 서브넷 4개가 생김
-16. copilot deploy # 서비스 생성 만약 Failed가 뜨면 자동으로 lolback이돌아가 늦으므로 IAM 스택에서 지우고 다시실행
-17. copilot init
-'''
+### copilot env deploy --name dev # 환경배포 / 서브넷 4개가 생김
+### copilot deploy # 서비스 생성 만약 Failed가 뜨면 자동으로 lolback이돌아가 늦으므로 IAM 스택에서 지우고 다시실행
+### copilot init
+
 Workload type: Backend Service
 Service name: poll-backend2
 Docker daemon is not responsive; Copilot won't build from a Dockerfile.
 Image: postgres
-'''
-18. copilot deploy # 권한이 없어서 안됨
-19. settings.py database수정
+
+### copilot deploy # 권한이 없어서 안됨
+### settings.py database수정
 ![image](https://user-images.githubusercontent.com/109319988/193976379-b1feb59b-979c-4200-80a6-edf12866aead.png)
 
 - Django-Poll-App 폴더에 Dockerfile.backend 파일만들고 아래코드 넣기
-'''
+
 FROM python:3.8-slim-buster
 
 RUN apt update \
@@ -268,9 +268,9 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 ENTRYPOINT ["sh","./docker-entrypoint.sh"]
-'''
-20. newgrp docker # 권한 부여
-21. copilot deploy # dockerfile 빌드 됨
+
+### newgrp docker # 권한 부여
+### copilot deploy # dockerfile 빌드 됨
 ## container service 에 로그확인
 ![image](https://user-images.githubusercontent.com/109319988/193975893-9fc6f447-c2b8-4a26-9894-d9b051b48ec2.png)
 
@@ -312,7 +312,7 @@ http {
         }
     }
 
-24. Django-Poll_App 폴더에 Dockerfile.frontend 파일 생성후 아래 코드 붙혀넣기
+### Django-Poll_App 폴더에 Dockerfile.frontend 파일 생성후 아래 코드 붙혀넣기
 
 
 
@@ -325,15 +325,15 @@ COPY static /data/static
 EXPOSE 80
 CMD ["nginx","-g","damon off;"]
 
-25. copilot init 
-26. Load Balanced Web Service 클릭
+### copilot init 
+### Load Balanced Web Service 클릭
 
 Workload type: Load Balanced Web Service
 Service name: poll-frontend2
 Dockerfile: ./Dockerfile.frontend
 
-27. copilot deploy -> poll-frontend2
-28. polls 폴더 밑에 middleware.py 생성 후 코드 입력
+### copilot deploy -> poll-frontend2
+### polls 폴더 밑에 middleware.py 생성 후 코드 입력
 from django.http import HttpResponse
 
 
@@ -347,17 +347,19 @@ class HealthCheckMiddleware:
         response = self.get_response(request)
         return response
 
-29. settings.py MIDDLEWARE 코드 추가 ->'polls.middleware.HealthCheckMiddleware',
-30. poll-frontend2/manifest.yml -> healthcheck: '/health' # 기본설정 바꿈
-31. settings.py 수정
+### settings.py MIDDLEWARE 코드 추가 ->'polls.middleware.HealthCheckMiddleware',
+### poll-frontend2/manifest.yml -> healthcheck: '/health' # 기본설정 바꿈
+### settings.py 수정
 
 DEBUG = False
 
 ALLOWED_HOSTS = ['.elb.amazonaws.com']
 
-32. copilot deploy -> poll-backend2
-33. copilot env init --name prod --profile default --container-insights # 환경 변수 작업
-34. copilot env deploy --name prod # env 환경 만들기
-35. copilot svc deploy --app poll-app --env prod --name poll-app2 # 클러스터 안에 넣기
-36. copilot svc deploy --app poll-app --env prod --name poll-backend2 # 클러스터 안에 넣기
-37. copilot svc deploy --app poll-app --env prod --name poll-frontend2 # 클러스터 안에 넣기
+### copilot deploy -> poll-backend2
+### copilot env init --name prod --profile default --container-insights # 환경 변수 작업
+### copilot env deploy --name prod # env 환경 만들기
+### copilot svc deploy --app poll-app --env prod --name poll-app2 # 클러스터 안에 넣기
+### copilot svc deploy --app poll-app --env prod --name poll-backend2 # 클러스터 안에 넣기
+### copilot svc deploy --app poll-app --env prod --name poll-frontend2 # 클러스터 안에 넣기
+### sudo apt install apache2-utils 
+### ab --help # apache2-utils 도움말
