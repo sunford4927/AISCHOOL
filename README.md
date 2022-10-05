@@ -314,6 +314,8 @@ http {
 '''
 24. Django-Poll_App 폴더에 Dockerfile.frontend 파일 생성후 아래 코드 붙혀넣기
 
+
+
 '''
 FROM nginx
 
