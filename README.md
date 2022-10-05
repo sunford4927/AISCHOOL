@@ -172,8 +172,8 @@ protocol = https : 80\
 
 머리속으로 상상하면서 하자!(AWS)
 # copilot 
-awscli window에서 돌아가는것도 있어서 키페어만 잘 관리하면 어디든 사용가능
-container 만들기
+- awscli window에서 돌아가는것도 있어서 키페어만 잘 관리하면 어디든 사용가능
+- container 만들기
 ### EC2 인스턴스 만들기
 ### VScode에 public Ip 입력후 들어가기
 ### 아래 코드 한 줄 씩 입력
@@ -181,19 +181,19 @@ container 만들기
 
 ### install AWS Copilot cli
 
-curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
-chmod +x copilot
-sudo mv copilot /usr/local/bin/copilot
-source <(copilot completion bash)
-copilot completion bash > copilot.sh
-sudo mv copilot.sh /etc/bash_completion.d/copilot
+curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux \
+chmod +x copilot \
+sudo mv copilot /usr/local/bin/copilot \
+source <(copilot completion bash) \
+copilot completion bash > copilot.sh \
+sudo mv copilot.sh /etc/bash_completion.d/copilot \
 
 ### install AWS cli
 
-sudo apt update && sudo apt install unzip
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-uzip awscliv2.zip
-sudo ./aws/install
+sudo apt update && sudo apt install unzip \
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+uzip awscliv2.zip \
+sudo ./aws/install \
 
 ### ubuntu@ip-172-31-38-27:~$ aws configure\
 AWS Access Key ID [None]: \
@@ -225,18 +225,18 @@ git switch ecs-base\
 ### EC2 인스턴스 작업 -> 보안 -> IAM 역활 선택
 ### VScode 로 돌아와 copilot init 입력 # copilot 생성
 
-Application name: poll-app
-Workload type: Backend Service
-Service name: poll-db
-Docker daemon is not responsive; Copilot won't build from a Dockerfile.
-Image: postgres
+Application name: poll-app \
+Workload type: Backend Service \
+Service name: poll-db \
+Docker daemon is not responsive; Copilot won't build from a Dockerfile. \
+Image: postgres \
 
 ### cd ubuntu/Django-Poll-App/
 ### copilot env init # 환경변수 설정
 
-Environment name: dev
-Credential source: [profile default]
-Default environment configuration? Yes, use default.
+Environment name: dev \
+Credential source: [profile default] \
+Default environment configuration? Yes, use default.\
 
 ### newgrp docker /도커 권한
 ### copilot svc ls /서비스목록
@@ -245,19 +245,19 @@ Default environment configuration? Yes, use default.
 ### copilot deploy # 서비스 생성 만약 Failed가 뜨면 자동으로 lolback이돌아가 늦으므로 IAM 스택에서 지우고 다시실행
 ### copilot init
 
-Workload type: Backend Service
-Service name: poll-backend2
-Docker daemon is not responsive; Copilot won't build from a Dockerfile.
-Image: postgres
+Workload type: Backend Service \
+Service name: poll-backend2 \
+Docker daemon is not responsive; Copilot won't build from a Dockerfile. \
+Image: postgres \
 
 ### manifest.yml(db파일) 수정
 - image -> port: 5432 추가
 - variables 추가
 
-variables:
-  POSTGRES_DB: poll
-  POSTGRES_USER: fast
-  POSTGRES_PASSWORD: 1234qwer
+variables: \
+  POSTGRES_DB: poll \
+  POSTGRES_USER: fast \
+  POSTGRES_PASSWORD: 1234qwer \
   
 ### copilot deploy # 권한이 없어서 안됨
 ### settings.py database수정
@@ -265,8 +265,8 @@ variables:
 
 - Django-Poll-App 폴더에 Dockerfile.backend 파일만들고 아래코드 넣기
 
-FROM python:3.8-slim-buster
-
+FROM python:3.8-slim-buster \
+\
 RUN apt update \
     && apt install -y gcc libpq-dev python-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -326,43 +326,45 @@ http {
 
 
 
-FROM nginx
+FROM nginx \
 
-COPY nginx/templates/default.conf.templates /etc/nginx/templates/default.conf.templates
-COPY nginx/config/nginx.conf /etc/nginx/nginx.conf
-COPY static /data/static
+COPY nginx/templates/default.conf.templates /etc/nginx/templates/default.conf.templates \
+COPY nginx/config/nginx.conf /etc/nginx/nginx.conf \
+COPY static /data/static \
 
-EXPOSE 80
-CMD ["nginx","-g","damon off;"]
+EXPOSE 80 \
+CMD ["nginx","-g","damon off;"] \
 
 ### copilot init 
 ### Load Balanced Web Service 클릭
 
-Workload type: Load Balanced Web Service
-Service name: poll-frontend2
-Dockerfile: ./Dockerfile.frontend
+Workload type: Load Balanced Web Service \
+Service name: poll-frontend2 \
+Dockerfile: ./Dockerfile.frontend \
 
 ### copilot deploy -> poll-frontend2
 ### polls 폴더 밑에 middleware.py 생성 후 코드 입력
 
-from django.http import HttpResponse
-class HealthCheckMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
+from django.http import HttpResponse \
+class HealthCheckMiddleware: \
+    def __init__(self, get_response): \
+        self.get_response = get_response \
 
-    def __call__(self, request):
-        if request.path == "/health":
-            return HttpResponse("ok")
-        response = self.get_response(request)
-        return response
+    def __call__(self, request): \
+        if request.path == "/health": \
+            return HttpResponse("ok") \
+        response = self.get_response(request) \
+        return response \
 
 ### settings.py MIDDLEWARE 코드 추가 ->'polls.middleware.HealthCheckMiddleware',
-### poll-frontend2/manifest.yml -> healthcheck: '/health' # 기본설정 바꿈
+### poll-frontend2/manifest.yml 
+- healthcheck: '/health' # 기본설정 바꿈
+- location 지우고 build: Dockerfile.frontend2
 ### settings.py 수정
 
-DEBUG = False
-
-ALLOWED_HOSTS = ['.elb.amazonaws.com']
+DEBUG = False \
+\
+ALLOWED_HOSTS = ['.elb.amazonaws.com'] \
 
 ### copilot deploy -> poll-backend2
 ### copilot env init --name prod --profile default --container-insights # 환경 변수 작업
